@@ -5,6 +5,7 @@ export default function PopupBoard({ dark }: { dark: boolean }) {
     const [columns, setColumns] = useState<string[]>(['']);
     const [boardName, setBoardName] = useState('');
     // Zustand funkcije
+    const setCurrentSheet = useBoardStore((state) => state.setCurrentSheet);
     const setActiveBoard = useBoardStore((state) => state.setActiveBoard);
     const setBoards = useBoardStore((state) => state.setBoards);
 
@@ -28,13 +29,11 @@ export default function PopupBoard({ dark }: { dark: boolean }) {
 
 
         setActiveBoard(boardName);
-        // Dodaj novi board u stanje
-
         setBoards(boardName, columns.filter(col => col.trim() !== ''));
-        console.log(boardName, columns);
+        setCurrentSheet(boardName, columns.filter(col => col.trim() !== ''), []);
+
+        // Reset form fields
         setBoardName('');
-
-
         setColumns(['']);
 
     };

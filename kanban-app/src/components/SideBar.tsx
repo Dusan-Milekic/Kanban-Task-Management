@@ -71,17 +71,19 @@ export default function SideBar() {
                         </h3>
 
                         <div>
-                            {boards.names.map((board) => (
+                            {boards.names.map((boardName, index) => (
                                 <div
-                                    key={board}
-                                    className={`relative flex items-center gap-3 mb-3 cursor-pointer py-2 px-3 rounded-r-lg ${activeBoard === board
-                                        ? 'bg-main-purple text-white'
-                                        : 'text-medium-grey hover:bg-main-purple-hover hover:text-white'
+                                    key={index}
+                                    className={`flex items-center gap-3 cursor-pointer py-2 px-3 rounded-r-lg ${activeBoard === boardName ? 'bg-main-purple' : ''
                                         }`}
-                                    onClick={() => setTitle(board)}
+                                    onClick={() => setTitle(boardName)}
                                 >
-                                    <img src="assets/boardpurple.svg" alt="board" className="z-10" />
-                                    <p className="text-[15px] font-bold">{board}</p>
+                                    <img src="assets/icon-board.svg" alt="board" />
+                                    <p className={`text-[15px] font-bold ${activeBoard === boardName ? 'text-white' : 'text-black dark:text-white'
+                                        }`}
+                                    >
+                                        {boardName}
+                                    </p>
                                 </div>
                             ))}
                         </div>

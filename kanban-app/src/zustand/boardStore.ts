@@ -11,9 +11,11 @@ type BoardStore = {
   activeBoard: string | null;
 
   boards: { names: string[] ,columns: string[]};
- 
+  currentSheet: { [key: string]: { name: string, columns: string[], tasks: Task[] } };
+
   setBoards: (board: string, columns: string[]) => void;
   setActiveBoard: (board: string) => void;
+  setCurrentSheet: (board: string, columns: string[], tasks: Task[]) => void;
 
 };
 
@@ -26,6 +28,14 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
     columns: localStorage.getItem('columns')
     ? JSON.parse(localStorage.getItem('columns') || '{"names":[],"columns":[]}') .columns
     : []},
+
+    currentSheet: localStorage.getItem('currentsheet')
+    ? JSON.parse(localStorage.getItem('currentsheet') || '{}')
+    : {},
+
+    tasks: localStorage.getItem('tasks')
+    ? JSON.parse(localStorage.getItem('tasks') || '{}')
+    : {},
 
   setActiveBoard: (board: string) => {
     set({ activeBoard: board });
@@ -44,5 +54,19 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
 
     set({ boards: { names: [...get().boards.names, boardName] , columns: [...get().boards.columns, ...columns] } });
   },
+  setCurrentSheet: (boardName:string, columns:string[],tasks:Task[]) => {
+    localStorage.setItem('currentsheet', JSON.stringify({
+        ...get().currentSheet,
+        [boardName]: { name: boardName, columns: columns, tasks: tasks },
+      }))
+    set({
+      currentSheet: {
+        ...get().currentSheet,
+        [boardName]: { name: boardName, columns: columns , tasks: tasks},
+      
+      },
+      
+    });
+  }
   
 }));
