@@ -1,15 +1,16 @@
 
+import { useRef } from 'react';
 import './App.css'
 import Header from './components/Header'
 import SideBar from './components/SideBar'
 import WorkSpace from './components/WorkSpace'
 function App() {
 
-
+  const sidebar = useRef<HTMLDivElement>(null);
   return (
     <>
       <div className="flex relative">
-        <div className="hidden md:block md:flex-1">
+        <div className="hidden md:block md:flex-1" ref={sidebar}>
           <SideBar />
 
         </div>

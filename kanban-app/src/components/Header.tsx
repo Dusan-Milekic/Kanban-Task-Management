@@ -1,12 +1,20 @@
+
+import { useBoardStore } from '../zustand/boardStore';
 export default function Header() {
+    const { activeBoard } = useBoardStore();
+
+    function showNav() {
+        const nav = document.getElementById('navbar');
+        nav?.classList.remove('hidden');
+    }
     return (
         <header className="p-4 bg-white dark:bg-dark-grey shadow-md flex items-center justify-between">
             <div className="flex items-center">
                 <div>
                     <img src="assets/logo-mobile.svg" alt="mobile" />
                 </div>
-                <div className="flex items-center gap-2 ml-4">
-                    <h1 className="text-black dark:text-white font-bold">Platform Launch</h1>
+                <div className="flex items-center gap-2 ml-4 cursor-pointer" onClick={showNav}>
+                    <h1 className="text-black dark:text-white font-bold">{activeBoard || "No selected"}</h1>
                     <img src="assets/icon-chevron-down.svg" alt="chevron" />
                 </div>
             </div>
