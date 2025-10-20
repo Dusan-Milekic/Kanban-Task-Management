@@ -35,7 +35,7 @@ export default function WorkSpace() {
                                 <p className="text-sm text-gray-500">No tasks</p>
                             ) : (
                                 tasksInColumn.map((task, taskIndex) => {
-                                    return (<TaskCard key={taskIndex} task={task} />);
+                                    return (<TaskCard key={taskIndex} task={task} allStatus={tasks.map(t => t.status)} />);
                                 })
                             )}
                         </div>
