@@ -1,16 +1,13 @@
 import { useState } from 'react';
+import { useBoardStore } from '../../zustand/boardStore';
 
-type BoardData = { [key: string]: string[] };
-
-interface PopupBoardProps {
-    dark: boolean;
-    board: BoardData;
-    setBoards: React.Dispatch<React.SetStateAction<BoardData>>;
-}
-
-export default function PopupBoard({ dark, board, setBoards }: PopupBoardProps) {
+export default function PopupBoard({ dark }: { dark: boolean }) {
     const [columns, setColumns] = useState<string[]>(['']);
     const [boardName, setBoardName] = useState('');
+    // Zustand funkcije
+    const setActiveBoard = useBoardStore((state) => state.setActiveBoard);
+    const setBoards = useBoardStore((state) => state.setBoards);
+
 
     const addColumn = () => setColumns([...columns, '']);
 
@@ -29,12 +26,17 @@ export default function PopupBoard({ dark, board, setBoards }: PopupBoardProps) 
 
         if (!boardName.trim() || columns.every(col => !col.trim())) return;
 
-        const updatedBoard = { ...board, [boardName]: columns };
-        setBoards(updatedBoard);
-        localStorage.setItem('fullboarddata', JSON.stringify(updatedBoard));
 
+        setActiveBoard(boardName);
+        // Dodaj novi board u stanje
+
+        setBoards(boardName, columns.filter(col => col.trim() !== ''));
+        console.log(boardName, columns);
         setBoardName('');
+
+
         setColumns(['']);
+
     };
 
     const inputClass = 'text-[13px] w-full p-2 border border-medium-grey rounded outline-0';

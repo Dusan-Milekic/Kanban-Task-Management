@@ -4,12 +4,12 @@ import { useBoardStore } from '../zustand/boardStore';
 
 export default function SideBar() {
     const [toggleTheme, setToggleTheme] = useState(false);
-    const { activeBoard, setActiveBoard, fullboardData, setFullBoardData } = useBoardStore();
+    const { activeBoard, setActiveBoard, boards } = useBoardStore();
     const nav = useRef<HTMLElement>(null);
     const popup = useRef<HTMLDivElement>(null);
     const blur_effect = useRef<HTMLDivElement>(null);
 
-    const boards = Object.keys(fullboardData);
+
 
     const setTitle = (boardTitle: string) => {
         setActiveBoard(boardTitle);
@@ -39,6 +39,7 @@ export default function SideBar() {
         nav.current?.classList.remove('animate-fade-right');
         nav.current?.classList.add('hidden');
 
+
     };
 
     return (
@@ -52,7 +53,7 @@ export default function SideBar() {
             </div>
 
             <div ref={popup} className="absolute top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 z-50 m-4 hidden">
-                <PopupBoard dark={toggleTheme} board={fullboardData} setBoards={setFullBoardData} />
+                <PopupBoard dark={toggleTheme} />
             </div>
 
             <nav id="navbar" ref={nav} className="bg-white dark:bg-dark-grey w-[261px] transi h-[100vh] py-4 shadow-md flex flex-col gap-8 justify-between  lg:w-[300px]">
@@ -66,11 +67,11 @@ export default function SideBar() {
 
                     <div className="space-y-5 pt-10">
                         <h3 className="text-medium-grey font-semibold text-[12px] px-5">
-                            ALL BOARDS ({boards.length})
+                            ALL BOARDS ({boards.names.length})
                         </h3>
 
                         <div>
-                            {boards.map((board) => (
+                            {boards.names.map((board) => (
                                 <div
                                     key={board}
                                     className={`relative flex items-center gap-3 mb-3 cursor-pointer py-2 px-3 rounded-r-lg ${activeBoard === board
