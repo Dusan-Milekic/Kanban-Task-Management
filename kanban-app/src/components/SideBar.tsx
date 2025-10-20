@@ -34,10 +34,12 @@ export default function SideBar() {
         blur_effect.current?.classList.add('hidden');
     };
 
+
     const hideSideBar = () => {
+        nav.current?.classList.remove('animate-fade-right');
         nav.current?.classList.add('hidden');
 
-    }
+    };
 
     return (
         <>
@@ -53,7 +55,7 @@ export default function SideBar() {
                 <PopupBoard dark={toggleTheme} board={fullboardData} setBoards={setFullBoardData} />
             </div>
 
-            <nav id="navbar" ref={nav} className="bg-white dark:bg-dark-grey w-[261px] h-[100vh] py-4 shadow-md flex flex-col gap-8 justify-between lg:w-[300px]">
+            <nav id="navbar" ref={nav} className="bg-white dark:bg-dark-grey w-[261px] transi h-[100vh] py-4 shadow-md flex flex-col gap-8 justify-between  lg:w-[300px]">
                 <div>
                     <div className="flex items-center gap-2 ml-4 py-1">
                         <img

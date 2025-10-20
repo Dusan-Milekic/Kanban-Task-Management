@@ -3,12 +3,15 @@ import { useBoardStore } from '../zustand/boardStore';
 export default function Header() {
     const { activeBoard } = useBoardStore();
 
+
     function showNav() {
         const nav = document.getElementById('navbar');
         nav?.classList.remove('hidden');
+        nav?.classList.add('animate-fade-right');
     }
+
     return (
-        <header className="p-4 bg-white dark:bg-dark-grey shadow-md flex items-center justify-between">
+        <header className="p-4  bg-white dark:bg-dark-grey shadow-md flex items-center justify-between">
             <div className="flex items-center">
                 <div>
                     <img src="assets/logo-mobile.svg" alt="mobile" />
