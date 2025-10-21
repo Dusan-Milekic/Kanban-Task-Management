@@ -18,6 +18,7 @@ export type BoardStore = {
   setActiveBoard: (board: string) => void;
   setCurrentSheet: (board: string, columns: string[], tasks: Task[]) => void;
   deleteTask?: (board: string, taskTitle: string) => void;
+  deleteBoard?: (board: string) => void;  
 };
 
 export const useBoardStore = create<BoardStore>((set, get) => ({
@@ -84,7 +85,14 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
     if (!boardObj) return;
     const updatedTasks = boardObj.tasks.filter((t) => t.title !== taskTitle);
     get().setCurrentSheet(boardName, boardObj.columns, updatedTasks);
-  }
+  },
+  deleteBoard: (boardName:string) => {
+    const {[boardName]: _, ...restSheets} = get().currentSheet;
+    const updatedBoardNames = get().boards.names.filter((name) => name !== boardName);
+    const updatedColumns = get().boards.columns.filter((col) => col !== boardName);
+   localStorage.setItem('currentsheet', JSON.stringify(restSheets));
+   localStorage.setItem('boards', JSON.stringify({ names: updatedBoardNames, columns: updatedColumns }));
 
-  
-}));
+   set({ currentSheet: restSheets, boards: { names: updatedBoardNames, columns: updatedColumns } });
+  },
+}));        
