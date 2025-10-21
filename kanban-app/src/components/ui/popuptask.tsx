@@ -118,7 +118,7 @@ export default function PopupTask() {
                 <label className="text-medium-grey pt-6">Status</label>
                 <select ref={statusRef} className="px-3 py-2 text-black font-bold outline-0 border border-gray-300">
                     {selectColumns.length === 0 ? <option value="">No columns</option> : null}
-                    {selectColumns.map((col, i) => (
+                    {selectColumns && selectColumns.map((col: string, i: number) => (
                         <option key={i} value={col}>
                             {col}
                         </option>

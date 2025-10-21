@@ -7,12 +7,13 @@ export type Task = {
   status: string;
 };
 
-type BoardStore = {
+export type BoardStore = {
   activeBoard: string | null;
 
   boards: { names: string[] ,columns: string[]};
   currentSheet: { [key: string]: { name: string, columns: string[], tasks: Task[] } };
-
+  completedTasks: { [key: string]: number };
+  setCompletedTasks: (board: string, count: number) => void;
   setBoards: (board: string, columns: string[]) => void;
   setActiveBoard: (board: string) => void;
   setCurrentSheet: (board: string, columns: string[], tasks: Task[]) => void;
@@ -28,7 +29,9 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
     columns: localStorage.getItem('columns')
     ? JSON.parse(localStorage.getItem('columns') || '{"names":[],"columns":[]}') .columns
     : []},
-
+    completedTasks: localStorage.getItem('completedtasks')
+    ? JSON.parse(localStorage.getItem('completedtasks') || '0')
+    : {},
     currentSheet: localStorage.getItem('currentsheet')
     ? JSON.parse(localStorage.getItem('currentsheet') || '{}')
     : {},
@@ -41,7 +44,15 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
     set({ activeBoard: board });
     localStorage.setItem('activeboard', board);
   },
-
+  setCompletedTasks: (board: string, count: number) => {
+    set((state) => ({
+      completedTasks: {
+        ...state.completedTasks,
+        [board]: count,
+      },
+    }));
+    localStorage.setItem('completedtasks', JSON.stringify(get().completedTasks));
+  },
 
 
   setBoards: (boardName:string,columns: string[]) => {
