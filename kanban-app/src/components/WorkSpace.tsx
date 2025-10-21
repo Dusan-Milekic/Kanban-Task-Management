@@ -9,6 +9,7 @@ import {
     Draggable,
     type DropResult,
 } from "@hello-pangea/dnd";
+import EditTaskPopup from "./ui/editpopuptask";
 
 export default function WorkSpace() {
     const activeBoard = useBoardStore((state) => state.activeBoard);
@@ -65,6 +66,17 @@ export default function WorkSpace() {
                 className="absolute top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 z-50 m-4 hidden"
             >
                 <DetailTaskPopup
+                    task={taskClicked}
+                    allStatus={columns}
+
+                />
+            </div>
+
+            <div
+                id="editTask"
+                className="absolute top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 z-50 m-4 hidden"
+            >
+                <EditTaskPopup
                     task={taskClicked}
                     allStatus={columns}
 

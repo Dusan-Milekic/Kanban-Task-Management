@@ -109,6 +109,14 @@ export default function DetailTaskPopup({
         document.getElementById("blur")?.classList.add("hidden");
     }
 
+    const editTask = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+
+        e.stopPropagation();
+
+        document.getElementById("viewTask")?.classList.add("hidden");
+
+        document.getElementById("editTask")?.classList.remove("hidden");
+    }
     return (
         <div
             id="popup-task"
@@ -127,7 +135,7 @@ export default function DetailTaskPopup({
                         id="actionsPopup"
                         className="absolute -left-12 w-[150px] py-3 space-y-4 bg-white  rounded-lg text-[13px] hidden"
                     >
-                        <p className="text-medium-grey">Edit task</p>
+                        <p className="text-medium-grey" onClick={editTask}>Edit task</p>
                         <p className="text-red" onClick={removeTask}>Delete task</p>
                     </div>
                 </div>

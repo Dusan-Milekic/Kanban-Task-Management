@@ -100,9 +100,9 @@ export default function PopupTask() {
                                 className="px-3 py-2 text-medium-grey outline-0 border border-gray-300 rounded w-full"
                                 placeholder="Enter subtask"
                             />
-                            <button type="button" onClick={() => removeSubtask(i)} className="px-2 py-1 border rounded">
-                                ✕
-                            </button>
+                            <img src="assets/icon-cross.svg" onClick={() => removeSubtask(i)} className=" rounded text-medium-grey">
+
+                            </img>
                         </div>
                     ))}
                 </div>
