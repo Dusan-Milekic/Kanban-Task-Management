@@ -12,6 +12,9 @@ export default function DetailTaskPopup({
     const completedTasks = useBoardStore((s) => s.completedTasks);
     const setCompletedTasks = useBoardStore((s) => s.setCompletedTasks);
 
+
+    const deleteTask = useBoardStore((s) => s.deleteTask);
+
     const uniqueStatuses = Array.from(new Set(allStatus));
 
     // lokalno pratimo koji su subtasks čekirani (index => boolean)
@@ -96,6 +99,16 @@ export default function DetailTaskPopup({
         store.setCurrentSheet(active, boardObj.columns, tasks);
     };
 
+    const removeTask = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+        e.stopPropagation();
+        console.log("Delete task clicked");
+        if (!task || !deleteTask) return;
+        deleteTask(useBoardStore.getState().activeBoard || "", task.title);
+        // zatvori popup
+        document.getElementById("viewTask")?.classList.add("hidden");
+        document.getElementById("blur")?.classList.add("hidden");
+    }
+
     return (
         <div
             id="popup-task"
@@ -115,7 +128,7 @@ export default function DetailTaskPopup({
                         className="absolute -left-12 w-[150px] py-3 space-y-4 bg-white  rounded-lg text-[13px] hidden"
                     >
                         <p className="text-medium-grey">Edit task</p>
-                        <p className="text-red">Delete task</p>
+                        <p className="text-red" onClick={removeTask}>Delete task</p>
                     </div>
                 </div>
             </div>

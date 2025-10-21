@@ -17,7 +17,7 @@ export type BoardStore = {
   setBoards: (board: string, columns: string[]) => void;
   setActiveBoard: (board: string) => void;
   setCurrentSheet: (board: string, columns: string[], tasks: Task[]) => void;
-
+  deleteTask?: (board: string, taskTitle: string) => void;
 };
 
 export const useBoardStore = create<BoardStore>((set, get) => ({
@@ -78,6 +78,13 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
       },
       
     });
+  },
+  deleteTask: (boardName:string, taskTitle:string) => {
+    const boardObj = get().currentSheet?.[boardName];
+    if (!boardObj) return;
+    const updatedTasks = boardObj.tasks.filter((t) => t.title !== taskTitle);
+    get().setCurrentSheet(boardName, boardObj.columns, updatedTasks);
   }
+
   
 }));
