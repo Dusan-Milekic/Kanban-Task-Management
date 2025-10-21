@@ -1,7 +1,7 @@
-import { type Task } from "../../zustand/boardStore";
+import { useBoardStore, type Task } from "../../zustand/boardStore";
 export default function TaskCard({ task, setTaskClicked }: { task: Task, allStatus: string[], setTaskClicked: React.Dispatch<React.SetStateAction<Task | undefined>> },) {
     const subtasksCount = Array.isArray(task.subtasks) ? task.subtasks.length : 0;
-    const completed = 0; // Placeholder for completed subtasks count
+    const completedTasks = useBoardStore((s) => s.completedTasks);
 
     const infoTask = () => {
         document.getElementById("viewTask")?.classList.remove("hidden");
@@ -15,7 +15,7 @@ export default function TaskCard({ task, setTaskClicked }: { task: Task, allStat
                 <p className="text-sm text-medium-grey font-medium">
                     {subtasksCount === 0
                         ? "0 of 0 tasks completed"
-                        : `${completed} of ${subtasksCount} tasks completed`}
+                        : `${completedTasks[task?.title] || 0} of ${subtasksCount} tasks completed`}
                 </p>
             </div>
         </>
