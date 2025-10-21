@@ -145,7 +145,7 @@ export default function Header() {
 
                             <div className="flex justify-center gap-3">
                                 <button
-                                    className="bg-red text-white rounded-3xl px-8 py-2"
+                                    className="bg-red text-white rounded-3xl px-8 py-2 cursor-pointer"
                                     onClick={() => {
                                         if (activeBoard && deleteBoard) {
                                             deleteBoard(activeBoard);
@@ -157,7 +157,7 @@ export default function Header() {
                                 </button>
 
                                 <button
-                                    className="bg-main-purple text-white rounded-3xl px-8 py-2"
+                                    className="bg-main-purple text-white rounded-3xl px-8 py-2 cursor-pointer"
                                     onClick={closeDeleteBoard}
                                 >
                                     Cancel
