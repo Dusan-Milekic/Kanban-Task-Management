@@ -39,7 +39,7 @@ export default function WorkSpace() {
 
     const handleDragEnd = (result: DropResult) => {
         setIsDragging(false);
-        const { source, destination, draggableId } = result;
+        const { destination, draggableId } = result;
         if (!destination) return;
 
         const draggedTask = tasks.find((t) => t.title === draggableId);
@@ -67,7 +67,7 @@ export default function WorkSpace() {
                 <DetailTaskPopup
                     task={taskClicked}
                     allStatus={columns}
-                    setIsDragging={setIsDragging}
+
                 />
             </div>
 

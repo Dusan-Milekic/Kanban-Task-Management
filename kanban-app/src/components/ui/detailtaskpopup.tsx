@@ -90,7 +90,7 @@ export default function DetailTaskPopup({
         );
 
         // next state for currentSheet
-        const next = { ...store.currentSheet, [active]: { ...boardObj, tasks } };
+
 
         // update store (tvoja setCurrentSheet bi trebalo da snimi i localStorage)
         store.setCurrentSheet(active, boardObj.columns, tasks);
