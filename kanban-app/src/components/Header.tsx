@@ -23,7 +23,7 @@ export default function Header() {
             setEditName(activeBoard || '');
             setColumns(Array.isArray(sheet?.columns) ? [...sheet.columns] : []);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
     }, [editVisible, activeBoard, currentSheet]);
 
     const showNav = () => {
