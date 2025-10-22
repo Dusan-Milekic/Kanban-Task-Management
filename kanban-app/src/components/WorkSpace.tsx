@@ -43,15 +43,18 @@ export default function WorkSpace() {
         const { destination, draggableId } = result;
         if (!destination) return;
 
+        const newStatus = destination.droppableId; // sada droppableId = ime kolone
+
         const draggedTask = tasks.find((t) => t.title === draggableId);
         if (!draggedTask) return;
 
         const updatedTasks = tasks.map((t) =>
-            t.title === draggableId ? { ...t, status: columns[destination.droppableId] } : t
+            t.title === draggableId ? { ...t, status: newStatus } : t
         );
 
         setCurrentSheet(activeBoard, columns, updatedTasks);
     };
+
 
     return (
         <>
@@ -78,7 +81,7 @@ export default function WorkSpace() {
             >
                 <EditTaskPopup
                     task={taskClicked}
-                    allStatus={columns}
+
 
                 />
             </div>
