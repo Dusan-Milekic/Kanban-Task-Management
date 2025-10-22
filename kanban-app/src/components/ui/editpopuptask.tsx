@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useBoardStore, type Task } from "../../zustand/boardStore";
 
-export default function EditTaskPopup({ task, allStatus }: { task: Task | undefined; allStatus: string[]; }) {
+export default function EditTaskPopup({ task }: { task: Task | undefined; }) {
     const titleRef = useRef<HTMLInputElement | null>(null);
     const descriptionRef = useRef<HTMLTextAreaElement | null>(null);
     const statusRef = useRef<HTMLSelectElement | null>(null);
