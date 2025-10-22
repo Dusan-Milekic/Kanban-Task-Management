@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <div className="flex relative">
-        <div className="hidden md:block md:flex-1" ref={sidebar}>
+        <div className="block md:flex-1" ref={sidebar}>
           <SideBar />
 
         </div>
